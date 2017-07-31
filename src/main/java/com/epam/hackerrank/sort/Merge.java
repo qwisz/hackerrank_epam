@@ -1,4 +1,4 @@
-package sort;
+package com.epam.hackerrank.sort;
 
 public class Merge {
     private int[] numbers;

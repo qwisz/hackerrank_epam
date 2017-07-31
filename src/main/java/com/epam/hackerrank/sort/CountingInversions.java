@@ -1,4 +1,4 @@
-package sort;
+package com.epam.hackerrank.sort;
 
 import java.util.Scanner;
 
