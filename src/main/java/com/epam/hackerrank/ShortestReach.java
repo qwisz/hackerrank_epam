@@ -1,22 +1,51 @@
 package com.epam.hackerrank;
 
 
-import java.util.Scanner;
+import java.util.*;
 
 public class ShortestReach {
 
     public static class Graph {
 
-        public Graph(int size) {
+        private List<List<Integer>> matrice;
+        private int size;
 
+        public Graph(int size) {
+            this.size = size;
+            matrice = new ArrayList<>();
+            for (int i = 0; i < size; i++) {
+                matrice.add(new ArrayList<>());
+            }
         }
 
         public void addEdge(int first, int second) {
-
+            matrice.get(first).add(second);
+            matrice.get(second).add(first);
         }
 
         public int[] shortestReach(int startId) {
-            return null;
+            LinkedList<Integer> list = new LinkedList<>();
+
+            int[] distances = new int[size];
+            Arrays.fill(distances, -1);
+
+            distances[startId] = 0;
+            list.add(startId);
+
+            HashSet<Integer> visited = new HashSet<>();
+            visited.add(startId);
+
+            while (!list.isEmpty()) {
+                int current = list.poll();
+                for (int node : matrice.get(current)) {
+                    if (!visited.contains(node)) {
+                        list.offer(node);
+                        visited.add(node);
+                        distances[node] = distances[current] + 6;
+                    }
+                }
+            }
+            return distances;
         }
 
     }
